@@ -425,7 +425,7 @@ In the `.get` method, add a `console.log(req.query)` and reload the web page. Yo
 
 Use this super-power to pass the user message from the frontend to the backend.
 
-- You will need to modify the url `fetch` call in `parrot/scripts.js` to be _dynamic_.
+- You will need to modify the url `fetch` call in `parrot/scripts.js` to be _dynamic_. Meaning that you will need to pass the user's message to the server via the query parameter.
 - You will need to receive the message in the server endpoint and send it back as the parrot's message.
 
 ---
