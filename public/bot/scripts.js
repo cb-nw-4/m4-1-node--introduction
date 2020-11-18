@@ -1,12 +1,10 @@
 const messageInput = document.querySelector('#user-input');
 const conversationElem = document.querySelector('#conversation-container');
 
-// focus the input on load
 const handleFocus = () => {
   messageInput.focus();
 };
 
-// updateConversation expects an object with 'user' and 'text'
 const updateConversation = (message) => {
   const { author, text } = message;
   const messageElem = document.createElement('p');
@@ -26,7 +24,7 @@ const sendMessage = (event) => {
   const message = { author: 'user', text: messageInput.value };
   updateConversation(message);
 
-  fetch('/bot-message')
+  fetch(`/bot-message/?usertext=${message.text}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -34,5 +32,4 @@ const sendMessage = (event) => {
     });
 };
 
-// call handleFocus on load
 handleFocus();

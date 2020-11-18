@@ -51,6 +51,31 @@ express()
     }, randomTime);
   })
 
+  .get('/bot-message', (req, res) => {
+    const userMessage = req.query.usertext;
+    const commonGreetings = ['hi', 'hello', 'howdy'];
+    const commonGoodbyes = ['bye', 'goodbye', 'cheerio', 'see you', 'later'];
+    const matchedGreetingArr = commonGreetings.filter((greeting) => {return userMessage.toLowerCase().includes(greeting)});
+    const matchedGoodbyeArr = commonGoodbyes.filter((goodbye) => {return userMessage.toLowerCase().includes(goodbye)});
+    
+    let botMsg = '';
+    if (matchedGreetingArr.length !== 0 && matchedGoodbyeArr.length === 0) {
+      botMsg = 'Hello!';
+    }
+    else if (matchedGoodbyeArr.length !== 0 && matchedGreetingArr.length === 0) {
+      botMsg = 'Goodbye!';
+    }
+    else {
+      botMsg = `Bzzt ${userMessage}`;
+    }
+
+    const message = { author: 'parrot', text: botMsg };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({status: 200, message });
+    }, randomTime);
+  })
+
   // add new endpoints here ☝️
   // ---------------------------------
   // Nothing to modify below this line
