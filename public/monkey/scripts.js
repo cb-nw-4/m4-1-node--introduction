@@ -21,6 +21,7 @@ const updateConversation = (message) => {
 };
 
 const sendMessage = (event) => {
+  console.log('monkey sendMessage')
   event.preventDefault();
 
   const message = { author: 'user', text: messageInput.value };
