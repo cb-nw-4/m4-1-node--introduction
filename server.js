@@ -3,18 +3,47 @@
 // import the needed node_modules.
 const express = require('express');
 const morgan = require('morgan');
+let isJokeAsk = false;
 
 const getBotMessage = (text) => {
   const commonGreetings = ["hi", "hello", "howdy"]; 
-  const commonGoodbyes = ["bye", "goodbye", "see you"]
+  const commonGoodbyes = ["bye", "goodbye", "see you"];
+  const commonJokes = [ "Did you hear about the claustrophobic astronaut? He just needed a little space.", 
+                        "Where are average things manufactured? The satisfactory.",
+                        "What did the left eye say to the right eye? Between you and me, something smells.", 
+                        "What do you call a magic dog? A labracadabrador.",
+                        "Talk is cheap? Have you ever talked to a lawyer?",
+                        "Two artists had an art contest. It ended in a draw!",
+                        "What is an astronaut’s favourite part on a computer? The space bar.",
+                        "Why did the yogurt go to the art exhibition? Because it was cultured.",
+                        "How do poets say hello? Hey, haven’t we metaphor?"];
   let msg = `Bzzt ${text}`;
+  const smallText = text.toLowerCase();
+
+  if (!isJokeAsk && smallText === "something funny") {
+    isJokeAsk = true;     
+    return 'Do you want to hear a joke? Answer YES or NO.';
+  }
+
+  if (isJokeAsk) {
+    switch(smallText) {
+      case "no":
+        isJokeAsk = false;
+        return "goodbye...";
+      case "yes":
+        return commonJokes[Math.floor(Math.random() * 9)] + " Do you want to hear another joke? Answer YES or NO.";
+      default:
+        return 'Do you want to hear a joke? Answer YES or NO.';
+    }
+  }
+  
   commonGreetings.forEach((greeting)=>{
-    if (text.toLowerCase().includes(greeting))
+    if (smallText.includes(greeting))
       msg = 'Bzzt Hello';
   });
 
   commonGoodbyes.forEach((goobye)=>{
-    if (text.toLowerCase().includes(goobye))
+    if (smallText.includes(goobye))
       msg = 'Bzzt Goodbye';
   });
   return msg;
