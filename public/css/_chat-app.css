@@ -66,7 +66,7 @@
   flex-direction: column;
   padding: 14px 14px 28px;
   overflow-y: scroll;
-  width: calc(100% + 18px);
+  width: calc(100%);
   scroll-behavior: smooth;
 }
 .message {
