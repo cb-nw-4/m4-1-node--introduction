@@ -4,6 +4,22 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const getBotMessage = (text) => {
+  const commonGreetings = ["hi", "hello", "howdy"]; 
+  const commonGoodbyes = ["bye", "goodbye", "see you"]
+  let msg = `Bzzt ${text}`;
+  commonGreetings.forEach((greeting)=>{
+    if (text.toLowerCase().includes(greeting))
+      msg = 'Bzzt Hello';
+  });
+
+  commonGoodbyes.forEach((goobye)=>{
+    if (text.toLowerCase().includes(goobye))
+      msg = 'Bzzt Goodbye';
+  });
+  return msg;
+};
+
 express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
@@ -55,6 +71,14 @@ express()
 
   .get('/parrot-message', (req, res) => {    
     const message =  { author: 'parrot', text: req.query.text };   
+    const randomTime = Math.floor(Math.random() * 3000);   
+    setTimeout(() => {
+          res.status(200).json({ status: 200, message });
+    }, randomTime);
+  })
+
+  .get('/bot-message', (req, res) => {     
+    const message =  { author: 'bot', text: getBotMessage(req.query.text) };   
     const randomTime = Math.floor(Math.random() * 3000);   
     setTimeout(() => {
           res.status(200).json({ status: 200, message });
