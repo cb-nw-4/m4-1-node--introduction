@@ -37,6 +37,22 @@ express()
     }, randomTime);
   })
 
+  .get('/monkey-message', (req, res) => {
+    const messages = [
+      "Don’t monkey around with me.",
+      "If you pay peanuts, you get monkeys.",
+      "I fling 💩 at you!",
+      "🙊",
+      "🙈",
+      "🙉",
+    ];
+    const message =  { author: 'monkey', text: messages[Math.floor(Math.random() * 6)] };   
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+          res.status(200).json({ status: 200, message });
+    }, randomTime);
+  })
+
   // this is our catch all endpoint. If a user navigates to any endpoint that is not
   // defined above, they get to see our 404 page.
   .get('*', (req, res) => {
@@ -50,3 +66,4 @@ express()
 
   // Node spins up our server and sets it to listen on port 8000.
   .listen(8000, () => console.log(`Listening on port 8000`));
+  
