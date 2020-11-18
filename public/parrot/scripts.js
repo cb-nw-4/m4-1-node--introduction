@@ -30,7 +30,8 @@ const sendMessage = (event) => {
   fetch(messageUrl)
     .then((res) => res.json())
     .then((data) => {
-      updateConversation(data.message);
+      updateConversation(data.message.text);
+      console.log(data)
     });
 };
 
