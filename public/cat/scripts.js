@@ -21,6 +21,7 @@ const updateConversation = (message) => {
   }
   handleFocus()
   console.log(conversationElem.scrollHeight)
+  
 };
 
 const sendMessage = (event) => {
