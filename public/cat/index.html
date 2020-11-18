@@ -14,7 +14,7 @@
       <div class="chat-app__header">
         <h2>Cat Chat</h2>
       </div>
-      <div class="chat-app__contents">
+      <div class="chat-app__content">
         <form class="user-form" onsubmit="sendMessage(event)">
           <label for="user-input" class="user-form--label"> Message the cat </label>
           <input
@@ -26,9 +26,10 @@
           <button class="user-form--button">Send</button>
         </form>
         <div class="conversation">
-          <div id="conversation-counter" class="conversation-counter"></div>
+          <div id="conversation-container" class="conversation-container"></div>
         </div>
       </div>
-      <script src="scripts.js"></script>
+    </div>
+    <script src="scripts.js"></script>
   </body>
 </html>
