@@ -6,6 +6,8 @@ const handleFocus = () => {
   messageInput.focus();
 };
 
+
+
 // updateConversation expects an object with 'user' and 'text'
 const updateConversation = (message) => {
   const { author, text } = message;
