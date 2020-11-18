@@ -1,12 +1,10 @@
 const messageInput = document.querySelector('#user-input');
 const conversationElem = document.querySelector('#conversation-container');
 
-// focus the input on load
 const handleFocus = () => {
   messageInput.focus();
 };
 
-// updateConversation expects an object with 'user' and 'text'
 const updateConversation = (message) => {
   const { author, text } = message;
   const messageElem = document.createElement('p');
@@ -29,10 +27,8 @@ const sendMessage = (event) => {
   fetch('/monkey-message')
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       updateConversation(data.message);
     });
 };
 
-// call handleFocus on load
 handleFocus();
