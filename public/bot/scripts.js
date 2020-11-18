@@ -20,13 +20,33 @@ const updateConversation = (message) => {
   handleFocus();
 };
 
+const getBotMessage = (text) => {
+  const commonGreetings = ["hi", "hello", "howdy"];
+  const commonGoodByes = ['bye', 'goodbye', 'bye bye', 'later'];
+
+
+  let botMsg = "";
+  if (commonGreetings.includes(text.toLowerCase())) {
+    botMsg = "Hello!";
+  } else if(commonGoodByes.includes(text.toLowerCase())){
+    botMsg = "Bye!";
+  }
+  else{
+    botMsg= text;
+  }
+  return botMsg;
+};
+
 const sendMessage = (event) => {
   event.preventDefault();
 
   const message = { author: 'user', text: messageInput.value };
+
+  const text = getBotMessage(messageInput.value);
+
   updateConversation(message);
 
-  fetch('/bot-message')
+  fetch(`/bot-message/?message=${text}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
