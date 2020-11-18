@@ -4,7 +4,7 @@ const messageInput = document.querySelector("#user-input");
 const conversationElem = document.querySelector("#conversation-container");
 
 
-console.log(messageInput.value)
+// console.log(messageInput.value)
 
 const handleFocus = () => {
     messageInput.focus();
@@ -43,15 +43,14 @@ const updateConversation = (message) => {
     messageElem.classList.add("message", author);
     // append the element to the conversation
     conversationElem.appendChild(messageElem);
-
-    console.log(message);
-    handleFocus();
-
+    conversationElem.scrollTop = conversationElem.scrollHeight;
+    
     if (author === "user") {
         messageInput.value = "";
     }
-
-    conversationElem.scrollTop = conversationElem.scrollHeight;
+    console.log(message);
+    handleFocus();
+    
 };
 
 handleFocus();
