@@ -20,9 +20,8 @@ const getBotMessage = (text) => {
   let msg = `Bzzt ${text}`;
   const smallText = text.toLowerCase();
 
-  if (!isJokeAsk && smallText === "something funny") {
-    isJokeAsk = true;     
-    return 'Do you want to hear a joke? Answer YES or NO.';
+  if (smallText === "something funny") {
+    isJokeAsk = true;       
   }
 
   if (isJokeAsk) {
