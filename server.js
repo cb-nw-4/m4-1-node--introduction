@@ -47,15 +47,56 @@ express()
     }, randomTime);
   })
 
-    // Parrot enpoint
-    .get('/parrot-message', (req, res) => {
-      const message = { author: 'parrot', text: req.query.userMsg};
-      const randomTime = Math.floor(Math.random() * 3000);
+  // Parrot enpoint
+  .get('/parrot-message', (req, res) => {
+    const message = { author: 'parrot', text: req.query.userMsg};
+    const randomTime = Math.floor(Math.random() * 3000);
 
-      setTimeout(() => {
-        res.status(200).json({status: 200, message});
-      }, randomTime);
-    })
+    setTimeout(() => {
+      res.status(200).json({status: 200, message});
+    }, randomTime);
+  })
+
+  // Parrot enpoint
+  .get('/parrot-message', (req, res) => {
+    const message = { author: 'parrot', text: req.query.userMsg};
+    const randomTime = Math.floor(Math.random() * 3000);
+
+    setTimeout(() => {
+      res.status(200).json({status: 200, message});
+    }, randomTime);
+  })
+
+  // Bot enpoint
+  .get('/bot-message', (req, res) => {
+    const getBotMessage = (text) => {
+      const commonGreetings = ['hi', 'hello', 'howdy'];
+      const commonGoodbyes = ['goodbye', 'see ya', 'later'];
+      let botMsg = `Bzzt "${text}"`;
+
+      // check for greeting words
+      for (let i = 0; i < commonGreetings.length; i++) {
+        if (text.toLowerCase().indexOf(commonGreetings[i]) !== -1) {
+          botMsg = 'Bzzt Hello!';
+        }
+      }
+
+      // check for goodbye words
+      for (let i = 0; i < commonGoodbyes.length; i++) {
+        if (text.toLowerCase().indexOf(commonGoodbyes[i]) !== -1) {
+          botMsg = 'Bzzt Ciao!';
+        }
+      }
+      return botMsg;
+    }
+
+    const message = { author: 'bot', text: getBotMessage(req.query.userMsg) };
+    const randomTime = Math.floor(Math.random() * 3000);
+
+    setTimeout(() => {
+      res.status(200).json({status: 200, message});
+    }, randomTime);
+  })
   // add new endpoints here ☝️
   // ---------------------------------
   // Nothing to modify below this line
