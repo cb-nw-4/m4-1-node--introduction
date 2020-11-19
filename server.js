@@ -47,11 +47,13 @@ express()
   })
 
   .get('/parrot-message', (req, res) => {
-    const message = {ahtor: 'parrot', text: 'Polly want a cracker?'};
+    const text = req.query.text;
+    const message = {author: 'parrot', text};
     const randomTime = Math.floor(Math.random() * 3000);
     setTimeout(() => {
       res.status(200).json({status: 200, message});
     }, randomTime);
+    console.log(req.query)
   })
 
   // add new endpoints here ☝️
