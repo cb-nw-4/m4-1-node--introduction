@@ -61,9 +61,12 @@ express()
     const query = req.query;
     const getBotMessage = (text) => {
       const commonGreetings = ["hi", "hello", "howdy"];
+      const commonGoodbyes = ["goodbye", "bye", "farewell"];
       let botMsg = "";
       if (commonGreetings.includes(text.toLowerCase())) {
         botMsg = "Hello.";
+      } else if (commonGoodbyes.includes(text.toLowerCase())) {
+          botMsg = "Goodbye";
       } else {
         botMsg = text;
       }
