@@ -51,6 +51,29 @@ express()
     console.log(req.query)
   })
 
+  .get('/bot-message', (req, res) => {
+    const getBotMessage = (text) => {
+      const commonGreetings = ["hi", "hello", "howdy"];
+      const commonGoodbyes = ["bye", "goodbye", "chow"]
+      let botMsg = `Bzzt ${text}`;
+      commonGreetings.forEach((element) =>{
+        if (element.includes(text.toLowerCase())) 
+          botMsg = "Bzzt Hello";
+      });
+      commonGoodbyes.forEach((element) =>{
+        if (element.includes(text.toLowerCase()))
+        botMsg = "Bzzt Goodbye";
+      })
+      return botMsg;
+    };
+
+    const message = { author: 'bot',  text: getBotMessage(req.query.text) };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+    res.status(200).json({status: 200, message });
+    }, randomTime);
+    console.log(req.query)
+  })
 
   // add new endpoints here ☝️
   // ---------------------------------
