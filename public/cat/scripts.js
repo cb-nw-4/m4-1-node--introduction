@@ -12,6 +12,11 @@ const updateConversation = (message) => {
   messageElem.innerHTML = `<span>${text}</span>`;
   conversationsElem.appendChild(messageElem);
   conversationsElem.scrollTop = conversationsElem.scrollHeight;
+
+  if (author === 'user') {
+    messageInput.value = '';
+  }
+  
   handleFocus();
 }
 
