@@ -4,6 +4,8 @@
 const express = require("express");
 const morgan = require("morgan");
 
+let somethingFunny = false;
+
 express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
@@ -59,23 +61,35 @@ express()
   })
 
   .get("/bot-message", (req, res) => {
-    const text = req.query
+    const text = req.query;
     // console.log(text)
     const getBotMessage = (text) => {
-      const commonGoodbyes = ['goodbye']
+      const jokes = ['the US election', `What happens to a frog's car when it breaks down?
+      It gets toad away.`, `Q: Is Google male or female?
+      A: Female, because it doesn't let you finish a sentence before making a suggestio`]
+      const randomJoke = Math.round(Math.random() * jokes.length)
+      const commonGoodbyes = ["goodbye"];
       const commonGreetings = ["hi", "hello", "howdy"];
       let botMsg = "";
-      if (commonGreetings.includes(text.text.toLowerCase())) {
+      if (text.text == "something funny") {
+        botMsg = "Do you want to hear a joke?";
+        somethingFunny = true;
+      } else if (somethingFunny == true && text.text == "YES") {
+        botMsg = `${jokes[randomJoke]} - Want Another?`;
+      } else if (somethingFunny == true && text.text == "NO") {
+        botMsg = "Goodbye";
+        somethingFunny = false
+      } else if (commonGreetings.includes(text.text.toLowerCase())) {
         botMsg = "Hello!";
       } else if (commonGoodbyes.includes(text.text.toLowerCase())) {
-        botMsg = 'Goodbye'
+        botMsg = "Goodbye";
       } else {
-        botMsg = `${text.text}`
+        botMsg = `${text.text}`;
       }
       return botMsg;
     };
 
-    const message = { author: "bot", text: `Bzzt ${getBotMessage(text)}`};
+    const message = { author: "bot", text: `Bzzt ${getBotMessage(text)}` };
     const randomTime = Math.floor(Math.random() * 3000);
     setTimeout(() => {
       res.status(200).json({ status: 200, message });
