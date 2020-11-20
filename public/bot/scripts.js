@@ -16,7 +16,10 @@ const updateConversation = (message) => {
   conversationElem.appendChild(messageElem);
   conversationElem.scrollTop = conversationElem.scrollHeight;
 
-  if (author === 'user') messageInput.value = '';
+  if (author === 'user') messageInput.value = ''; 
+
+
+
   handleFocus();
 };
 
@@ -24,9 +27,13 @@ const sendMessage = (event) => {
   event.preventDefault();
 
   const message = { author: 'user', text: messageInput.value };
-  updateConversation(message);
+  updateConversation(message); 
+  messageUrl = `/bot-message?message=${message.text}` ;
 
-  fetch('/bot-message')
+
+  
+
+  fetch(messageUrl)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
