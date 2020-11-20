@@ -17,11 +17,29 @@ express()
   // Nothing to modify above this line
   // ---------------------------------
   // add new endpoints here 👇
+  //get cat
   .get('/cat-message', (req, res) => {
     const message = { author: 'cat', text: 'Meow' };
     const randomTime = Math.floor(Math.random() * 3000);
     setTimeout(() => {
       res.status(200).json({status: 200, message });
+    }, randomTime);
+  })
+
+  //get monkey 
+  .get('/monkey-message', (req, res) => {
+    const messages = [
+      "Don’t monkey around with me.",
+      "If you pay peanuts, you get monkeys.",
+      "I fling 💩 at you!",
+      "🙊",
+      "🙈",
+      "🙉",
+    ];
+    const message = { author: 'monkey', text: messages[Math.floor(Math.random() * 5)] };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({status: 200, message});
     }, randomTime);
   })
 
