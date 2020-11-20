@@ -4,8 +4,7 @@
 // import the needed node_modules.
 const express = require('express');
 const morgan = require('morgan');
-let firstApproval=false;
-let secondApproval=false;
+let approval=false;
 express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
@@ -74,19 +73,15 @@ express()
       }
       else if(text.toLowerCase()==="something funny"){
         botMsg="Do you want to hear a joke?";
-        firstApproval=true;
-        //setApproval({first:true})
+        approval=true;
       }
-      else if(text.toLowerCase()==="yes"){
-        secondApproval=true;
-        //setApproval({second:true})
-        console.log(firstApproval, secondApproval);
-        if(firstApproval && secondApproval){
+      else if(text.toLowerCase()==="yes" && approval){
+        approval=false;
           botMsg=joke[Math.floor(Math.random()*joke.length)]; 
-        }
-        else{
-          botMsg="Fine..we have a lot of happiness around with pandemic and all."
-        }
+      }
+      else if(text.toLowerCase()==="no" && approval){
+        approval=false;
+        botMsg="Fine..we have a lot of happiness around with pandemic and all. Goodbye."
       }
       else{
         botMsg = "Bzzt " + text;
