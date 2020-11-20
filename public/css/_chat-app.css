@@ -45,6 +45,9 @@
   border-radius: 0 0 0 var(--container-border-radius);
   height: var(--input-height);
   padding: 4px 8px;
+} 
+.user-form--input:focus { 
+  border-color:blue;
 }
 .user-form--button {
   background: #4287f5;
