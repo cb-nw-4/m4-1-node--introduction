@@ -33,6 +33,7 @@ const sendMessage = (event) => {
       updateConversation(data.message.text);
       console.log(data)
     });
+    
 };
 
 // call handleFocus on load

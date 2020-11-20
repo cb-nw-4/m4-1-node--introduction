@@ -49,21 +49,39 @@ express()
 
   .get("/parrot-message", (req, res) => {
     const text = req.query;
-    const message = {author: 'parrot', text}
+    console.log(req.query);
+    console.log(res, req);
+    const message = { author: "parrot", text };
     const randomTime = Math.floor(Math.random() * 3000);
     setTimeout(() => {
       res.status(200).json({ status: 200, message });
     }, randomTime);
   })
 
-  // .get("/parrot-message", (req, res) => {
-  //   const message = req.query;
-  //   const randomTime = Math.floor(Math.random() * 3000);
-  //   setTimeout(() => {
-  //     res.status(200).json({ status: 200, message });
-  //   }, randomTime);
+  .get("/bot-message", (req, res) => {
+    const text = req.query
+    // console.log(text)
+    const getBotMessage = (text) => {
+      const commonGoodbyes = ['goodbye']
+      const commonGreetings = ["hi", "hello", "howdy"];
+      let botMsg = "";
+      if (commonGreetings.includes(text.text.toLowerCase())) {
+        botMsg = "Hello!";
+      } else if (commonGoodbyes.includes(text.text.toLowerCase())) {
+        botMsg = 'Goodbye'
+      } else {
+        botMsg = `${text.text}`
+      }
+      return botMsg;
+    };
 
-  // })
+    const message = { author: "bot", text: `Bzzt ${getBotMessage(text)}`};
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({ status: 200, message });
+    }, randomTime);
+  })
+
   // add new endpoints here ☝️
   // ---------------------------------
   // Nothing to modify below this line
