@@ -64,7 +64,11 @@ express()
       const joke=[ 
         "One joke, coming up! What is a sea monster’s favorite snack? Ships and dip. 🛳",
         "Alrighty! What did one snowman say to the other? Do you smell carrots?",
-        "This might make you laugh. How do robots eat guacamole? With computer chips."
+        "This might make you laugh. How do robots eat guacamole? With computer chips.",
+        "Lets tickle your funny bone. I went shopping for some camouflage pants, but couldn't find any.",
+        "Here you go! Why don't ghosts like rain? It dampens their spirit 👻",
+        "Okay this is funny. How do you make a squid laugh? With ten-tickles🤣",
+        "Ready to laugh? Why can't Dalmatians play hide and seek? Because they are always spotted.😬"
     ];
       let botMsg = "";
 
