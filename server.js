@@ -56,35 +56,42 @@ express()
   })
 
   .get("/bot-message", (req, res) => {
-    let text = req.query.text;
-
-    let isTrue = false;
-
     const getBotMessage = (text) => {
       let botMsg = "";
-      const commonGreetings = ["hi", "hello", "howdy"];
-    const words = text.toLowerCase().split(' ');
-    console.log(words);
-      if (words.find((word)=> {
-        return commonGreetings.includes(word)
 
-      })) {
+      const botJokes = [
+        "I failed math so many times at school, I can’t even count.",
+        "The problem with kleptomaniacs is that they always take things literally.",
+        "Never trust atoms; they make up everything.",
+      ];
+      const theJoke = botJokes[Math.floor(Math.random() * botJokes.length)];
+
+      if (text.toLowerCase().match(/\w*(something funny)/gi)) {
+        botMsg = "Would you like to hear a joke ? (Write YES or NO)";
+      } else if (text === "YES") {
+        botMsg = theJoke;
+      } else if (text === "NO") {
+        botMsg = "It's okay, fun is not for everyone. ";
+      } else if (text.toLowerCase().match(/^hi|hello|howdy/gi)) {
         botMsg = "Hello!";
-        isTrue = true;
+      } else if (text.toLowerCase().match(/^bye|goodbye|ciao/gi)) {
+        botMsg = "Goodbye!";
+      } else {
+        botMsg = `Bzzt ${text}`;
       }
       return botMsg;
     };
 
-    const botMsg = getBotMessage(text);
-
-    text = botMsg === "" ? `Bzzt  ${text}` : botMsg;
-    const message = { author: "bot", text };
+    const message = {
+      author: "bot",
+      text: ` ${getBotMessage(req.query.message)}`,
+    };
     console.log(message);
     const randomTime = Math.floor(Math.random() * 3000);
-    // setTimeout(() => {
+    setTimeout(() => {
     res.status(200).json({ status: 200, message });
-    //   }, randomTime);
-    // })
+      }, randomTime);
+
   })
   // add new endpoints here ☝️
   // ---------------------------------

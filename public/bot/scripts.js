@@ -28,7 +28,7 @@ const sendMessage = (event) => {
 
   const message = { author: 'user', text: messageInput.value };
   updateConversation(message); 
-  messageUrl = `/bot-message?text=${message.text}` ;
+  messageUrl = `/bot-message?message=${message.text}` ;
 
 
   
