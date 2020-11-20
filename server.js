@@ -37,6 +37,27 @@ express()
    }, randomTime);
   })
 
+  .get('/monkey-message', (req, res) => {
+    const messages = [
+      "Don’t monkey around with me.",
+      "If you pay peanuts, you get monkeys.",
+      "I fling 💩 at you!",
+      "🙊",
+      "🙈",
+      "🙉",
+    ];
+    const randomIndex = Math.floor(Math.random()*6);
+    const randomText = messages[randomIndex];
+    const message = { author: 'monkey', text: randomText };
+    const randomTime = Math.floor(Math.random() * 3000);
+   setTimeout(() => {
+      res.status(200).json({ status: 200, message });
+   }, randomTime);
+  })
+
+
+
+
   // this is our catch all endpoint. If a user navigates to any endpoint that is not
   // defined above, they get to see our 404 page.
   .get('*', (req, res) => {
