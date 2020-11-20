@@ -66,7 +66,16 @@ express()
    console.log(req.query.text);
   })
 
+  .get('/bot-message', (req, res) => {
 
+    let botMsg = getBotMessage(req.query.text);
+
+    const message = { author: 'bot', text: botMsg };
+    const randomTime = Math.floor(Math.random() * 3000);
+   setTimeout(() => {
+      res.status(200).json({ status: 200, message });
+   }, randomTime);
+  })
 
 
   // this is our catch all endpoint. If a user navigates to any endpoint that is not
@@ -82,3 +91,34 @@ express()
 
   // Node spins up our server and sets it to listen on port 8000.
   .listen(8000, () => console.log(`Listening on port 8000`));
+
+  const getBotMessage = (text) => {
+    const commonGreetings = ["hi", "hello", "howdy","hey"];
+    const commonGoodbyes = ["bye", "goodbye", "see you","ciao"];
+
+    let botMsg = "Bzzt ";
+    let isGreeting = false;
+    let isGoodbye = false;
+
+    commonGreetings.map((greeting)=>{
+      if(text.toLowerCase().includes(greeting)){
+        isGreeting = true;
+      }
+    });
+
+    commonGoodbyes.map((goodbye)=>{
+      if(text.toLowerCase().includes(goodbye)){
+        isGoodbye = true;
+      }
+    });
+
+    if (isGreeting) {
+      botMsg += "Hello.";
+    }else if(isGoodbye){
+      botMsg += "Bye.";
+    }
+    else{
+      botMsg += `"${text}"`;
+    }
+    return botMsg;
+  };
