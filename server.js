@@ -3,6 +3,7 @@
 // import the needed node_modules.
 const express = require('express');
 const morgan = require('morgan');
+let tellingJoke = false;
 
 express()
   // Below are methods that are included in express(). We chain them for convenience.
@@ -70,24 +71,59 @@ express()
   // Bot enpoint
   .get('/bot-message', (req, res) => {
     const getBotMessage = (text) => {
+      const jokes = [
+        { joke: 'How do robots eat guacamole?', punchLine: 'With microchips!'},
+        { joke: 'What do robots wear when it snows?', punchLine: 'Roboots!'},
+        { joke: 'What android team won the Olympic watersports?', punchLine: 'The rowbots!'},
+        { joke: 'What kind of androids do you find in the arctic?', punchLine: 'Snobots!'},
+        { joke: 'What did the baby robot call its creator?', punchLine: 'Da-Ta!'},
+        { joke: 'What do robots do at lunchtime?', punchLine: 'Have a megabyte!'},
+        { joke: 'What happened when they shut down the robot motorway?', punchLine: 'Everyone had to take the R2-Detour!'},
+        { joke: 'Did you know RD2D uses foul language?', punchLine: 'They have to bleep out all his words!'}
+      ];
+      const funnyWords = ['bumfuzzle', 'taradiddle', 'collywobbles', 'Bumbershoot', 'lollygag', 'malarkey', 'snollygoster'];
       const commonGreetings = ['hi', 'hello', 'howdy'];
       const commonGoodbyes = ['goodbye', 'see ya', 'later'];
-      let botMsg = `Bzzt "${text}"`;
 
-      // check for greeting words
-      for (let i = 0; i < commonGreetings.length; i++) {
-        if (text.toLowerCase().indexOf(commonGreetings[i]) !== -1) {
-          botMsg = 'Bzzt Hello!';
+      if (tellingJoke) {
+        if (text.toLowerCase() !== 'yes' && text.toLowerCase() !== 'no') {
+          return 'Want to hear a joke? Yes/No';
+        } else if (text.toLowerCase() === 'yes') {
+          const randomJoke = Math.floor(Math.random() * 8);
+          return `${jokes[randomJoke].joke}<br/><br/>${jokes[randomJoke].punchLine}<br/><br/>Haha! 😆😆😆 Bzzt Another?`;
+        } else {
+          tellingJoke = false;
+          return 'Ok 🙁';
+        }
+      } else {
+        let botMsg = `Bzzt "${text}"`;
+
+        // check for funny words
+        for (let i = 0; i < funnyWords.length; i++) {
+          if (text.toLowerCase().indexOf(funnyWords[i]) !== -1) {
+            tellingJoke = true;
+            return 'LOL! 😂<br/><br/>Want to hear a joke? Yes/No';
+          }
+        }
+
+        if (!tellingJoke) {
+          // check for greeting words
+          for (let i = 0; i < commonGreetings.length; i++) {
+            if (text.toLowerCase().indexOf(commonGreetings[i]) !== -1) {
+              botMsg = 'Bzzt Hello!';
+            }
+          }
+
+          // check for goodbye words
+          for (let i = 0; i < commonGoodbyes.length; i++) {
+            if (text.toLowerCase().indexOf(commonGoodbyes[i]) !== -1) {
+              botMsg = 'Bzzt Ciao!';
+            }
+          }
+          
+          return botMsg;
         }
       }
-
-      // check for goodbye words
-      for (let i = 0; i < commonGoodbyes.length; i++) {
-        if (text.toLowerCase().indexOf(commonGoodbyes[i]) !== -1) {
-          botMsg = 'Bzzt Ciao!';
-        }
-      }
-      return botMsg;
     }
 
     const message = { author: 'bot', text: getBotMessage(req.query.userMsg) };
