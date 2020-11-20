@@ -25,13 +25,15 @@ const sendMessage = (event) => {
 
   const message = { author: 'user', text: messageInput.value };
   updateConversation(message);
+  const messageUrl = `/parrot-message?text=${message.text}`
 
-  fetch('/parrot-message')
+  fetch(messageUrl)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-      updateConversation(data.message);
+      updateConversation(data.message.text);
+      console.log(data)
     });
+    
 };
 
 // call handleFocus on load
