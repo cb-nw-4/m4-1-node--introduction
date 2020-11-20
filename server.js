@@ -17,6 +17,45 @@ express()
   // Nothing to modify above this line
   // ---------------------------------
   // add new endpoints here 👇
+  .get('/cat-message', (req, res) => {
+    console.log("cat")
+    const message = { author: 'cat', text: 'Meow' };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({ status: 200, message });
+    }, randomTime);
+  })
+
+  .get('/monkey-message', (req, res) => {
+    console.log("monkey endpoint" )
+    const messageArr = [
+      "Don’t monkey around with me.",
+      "If you pay peanuts, you get monkeys.",
+      "I fling 💩 at you!",
+      "🙊",
+      "🙈",
+      "🙉",
+    ];
+    const randomNum = Math.floor(Math.random() * messageArr.length);
+    const textExample = messageArr[randomNum];
+    console.log(textExample, 'testing');
+    const message = { author: 'monkey', text: textExample};
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(300).json({ status: 300, message })
+    }, randomTime)
+  })
+
+  .get('/parrot-message', (req, res) => {
+    console.log("parrot")
+    const message = { author: 'parrot', text: 'Polly want a crackers?' };
+    const randomTime = Math.floor(Math.random() * 3000);
+    console.log(req.query.text);
+    setTimeout(() => {
+      res.status(400).json({ status: 400, message });
+    }, randomTime);
+    console.log(req.query);
+  })
 
   // add new endpoints here ☝️
   // ---------------------------------
