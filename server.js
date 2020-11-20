@@ -25,10 +25,6 @@ express()
     }, randomTime);
   })
 
-
-
-  
-
   .get('/monkey-message', (req, res) => {
     const messages = [
       "Don’t monkey around with me.",
@@ -40,12 +36,19 @@ express()
     ];
     const randomMessage = { author: 'monkey', text:messages[Math.floor(Math.random() * messages.length)]  };
     const randomTime = Math.floor(Math.random() * 3000);
-
-    
-
     setTimeout(() => {
     res.status(200).json({status: 200, message:randomMessage });
     }, randomTime,);
+  })
+
+  .get('/parrot-message', (req, res) => {
+    
+    const message = { author: 'parrot',  text: req.query.text };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+    res.status(200).json({status: 200, message });
+    }, randomTime);
+    console.log(req.query)
   })
 
 
