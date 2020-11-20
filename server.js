@@ -19,37 +19,39 @@ express()
   // add new endpoints here 👇
 
   .get('/parrot-message', (req, res) => {
-    const message = { author: "parrot", text: "Polly wants a cracker" };
+
+    const text = req.query.text;
+    const message = { author: "parrot", text };
     const randomTime = Math.floor(Math.random() * 3000);
-    console.log(req.query);
+    console.log(req.query.text);
     setTimeout(() => {
       res.status(200).json({ status: 200, message })
     }, randomTime);
     })
 
-  .get('/monkey-message', (req, res) => {
-    const messages = [
-      "Don’t monkey around with me.",
-      "If you pay peanuts, you get monkeys.",
-      "I fling 💩 at you!",
-      "🙊",
-      "🙈",
-      "🙉",
-    ];
-    const message = { author: 'monkey', text: messages[Math.floor(Math.random() * messages.length)] };
-    const randomTime = Math.floor(Math.random() * 3000);
-    setTimeout(() => {
-      res.status(200).json({ status: 200, message })
-    }, randomTime);
-  })
+  // .get('/monkey-message', (req, res) => {
+  //   const messages = [
+  //     "Don’t monkey around with me.",
+  //     "If you pay peanuts, you get monkeys.",
+  //     "I fling 💩 at you!",
+  //     "🙊",
+  //     "🙈",
+  //     "🙉",
+  //   ];
+  //   const message = { author: 'monkey', text: messages[Math.floor(Math.random() * messages.length)] };
+  //   const randomTime = Math.floor(Math.random() * 3000);
+  //   setTimeout(() => {
+  //     res.status(200).json({ status: 200, message })
+  //   }, randomTime);
+  // })
 
-  .get('/cat-message', (req, res) => {
-    const message = { author: 'cat', text: 'Meow' };
-    const randomTime = Math.floor(Math.random() * 3000);
-    setTimeout(() => {
-      res.status(200).json({status: 200, message })
-    }, randomTime);
-  });
+  // .get('/cat-message', (req, res) => {
+  //   const message = { author: 'cat', text: 'Meow' };
+  //   const randomTime = Math.floor(Math.random() * 3000);
+  //   setTimeout(() => {
+  //     res.status(200).json({status: 200, message })
+  //   }, randomTime);
+  // });
 
   // add new endpoints here ☝️
   // ---------------------------------

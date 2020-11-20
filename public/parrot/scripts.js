@@ -24,9 +24,10 @@ const sendMessage = (event) => {
   event.preventDefault();
 
   const message = { author: 'user', text: messageInput.value };
+  console.log(message.text)
   updateConversation(message);
 
-  fetch('/parrot-message')
+  fetch(`/parrot-message/?text=${message.text}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
