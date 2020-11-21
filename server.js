@@ -18,6 +18,39 @@ express()
   // ---------------------------------
   // add new endpoints here 👇
 
+  .get('/bot-message', (req, res) => {
+
+    let text = "";
+    let jokeRequest = false;
+    const commonGreetings = ["hi", "hello", "howdy", "hola", "bonjour"];
+    const commonGoodbyes = ["bye", "adios", "ciao", "peace", "good-bye", "goodbye"];
+    const funnyJokes = ["Time flies like an arrow, fruit flies like a banana.", "I told my doctor that I broke my arm in two places. He told me to stop going to those places.", "What do you call it when Batman skips church? Christian Bale.", "What's orange and sounds like a parrot? A carrot.", "I used to be addicted to soap, but I'm clean now."];
+    const somethingFunny = "something funny";
+
+    // if (req.query.text === "something funny" || req.query.text === "Something funny") {
+    //   text = funnyJokes[Math.floor(Math.random() * funnyJokes.length)]
+
+    if (somethingFunny.includes(req.query.text.toLowerCase())) {
+      text = "Do you want to hear a joke? Reply YES or NO";
+    } else if (req.query.text === "YES" || req.query.text === "yes") {
+      text = funnyJokes[Math.floor(Math.random() * funnyJokes.length)]
+    } else if (req.query.text === "NO" || req.query.text === "no") {
+      text = "Oh. Ok. Bye then."
+    } else if (commonGreetings.includes(req.query.text.toLowerCase())) {
+      text = "Hello!";
+    } else if (ommonGoodbyes.includes(req.query.text.toLowerCase())) {
+      text = "Goodbye!";
+    } else {
+      text = "Bzzt " + req.query.text;
+    }
+
+    const message = { author: "bot", text };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({ status: 200, message })
+    }, randomTime);
+  })
+
   .get('/parrot-message', (req, res) => {
 
     const text = req.query.text;
@@ -29,29 +62,29 @@ express()
     }, randomTime);
     })
 
-  // .get('/monkey-message', (req, res) => {
-  //   const messages = [
-  //     "Don’t monkey around with me.",
-  //     "If you pay peanuts, you get monkeys.",
-  //     "I fling 💩 at you!",
-  //     "🙊",
-  //     "🙈",
-  //     "🙉",
-  //   ];
-  //   const message = { author: 'monkey', text: messages[Math.floor(Math.random() * messages.length)] };
-  //   const randomTime = Math.floor(Math.random() * 3000);
-  //   setTimeout(() => {
-  //     res.status(200).json({ status: 200, message })
-  //   }, randomTime);
-  // })
+  .get('/monkey-message', (req, res) => {
+    const messages = [
+      "Don’t monkey around with me.",
+      "If you pay peanuts, you get monkeys.",
+      "I fling 💩 at you!",
+      "🙊",
+      "🙈",
+      "🙉",
+    ];
+    const message = { author: 'monkey', text: messages[Math.floor(Math.random() * messages.length)] };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({ status: 200, message })
+    }, randomTime);
+  })
 
-  // .get('/cat-message', (req, res) => {
-  //   const message = { author: 'cat', text: 'Meow' };
-  //   const randomTime = Math.floor(Math.random() * 3000);
-  //   setTimeout(() => {
-  //     res.status(200).json({status: 200, message })
-  //   }, randomTime);
-  // });
+  .get('/cat-message', (req, res) => {
+    const message = { author: 'cat', text: 'Meow' };
+    const randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      res.status(200).json({status: 200, message })
+    }, randomTime);
+  });
 
   // add new endpoints here ☝️
   // ---------------------------------
