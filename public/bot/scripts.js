@@ -22,11 +22,12 @@ const updateConversation = (message) => {
 
 const sendMessage = (event) => {
   event.preventDefault();
-
-  const message = { author: 'user', text: messageInput.value };
+  const text = messageInput.value;
+  console.log(text);
+  const message = { author: 'user', text: text };
   updateConversation(message);
 
-  fetch('/bot-message')
+  fetch(`/bot-message/?text=${message.text}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
