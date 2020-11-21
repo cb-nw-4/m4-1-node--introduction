@@ -1,99 +1,111 @@
 :root {
-  --header-height: 70px;
-  --input-height: 40px;
-  --container-border-radius: 4px;
+    --header-height: 70px;
+    --input-height: 40px;
+    --container-border-radius: 4px;
 }
+
 .chat-app {
-  background: #fff;
-  border: #eaeaea;
-  border-radius: var(--container-border-radius);
-  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
-  height: 100vh;
-  width: 100%;
-  max-width: 360px;
+    background: #fff;
+    border: #eaeaea;
+    border-radius: var(--container-border-radius);
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.15);
+    height: 100vh;
+    width: 100%;
+    max-width: 360px;
 }
+
 .chat-app__header {
-  background: #4287f5;
-  border-radius: var(--container-border-radius) var(--container-border-radius) 0
-    0;
-  box-shadow: 0px 3px 3px -1px rgba(0, 0, 0, 0.06);
-  height: var(--header-height);
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
+    background: #4287f5;
+    border-radius: var(--container-border-radius) var(--container-border-radius) 0 0;
+    box-shadow: 0px 3px 3px -1px rgba(0, 0, 0, 0.06);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
 }
+
 .chat-app__header h2 {
-  color: #fff;
+    color: #fff;
 }
 
 .chat-app__content {
-  display: flex;
-  flex-direction: column-reverse;
-  height: calc(100% - var(--header-height));
+    display: flex;
+    flex-direction: column-reverse;
+    height: calc(100% - var(--header-height));
 }
+
 .user-form {
-  box-shadow: 0px -3px 3px -1px rgba(0, 0, 0, 0.06);
-  display: flex;
-  z-index: 1;
+    box-shadow: 0px -3px 3px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    z-index: 1;
 }
+
 .user-form--label {
-  display: none;
+    display: none;
 }
+
 .user-form--input {
-  flex: 1 0 auto;
-  border: none;
-  border-radius: 0 0 0 var(--container-border-radius);
-  height: var(--input-height);
-  padding: 4px 8px;
+    flex: 1 0 auto;
+    border: none;
+    border-radius: 0 0 0 var(--container-border-radius);
+    height: var(--input-height);
+    padding: 4px 8px;
 }
+
 .user-form--button {
-  background: #4287f5;
-  color: #fff;
-  cursor: pointer;
-  border: none;
-  border-radius: 0 0 var(--container-border-radius) 0;
-  letter-spacing: 0.95px;
-  padding: 3px 8px;
-  font-weight: 700;
+    background: #4287f5;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 0 0 var(--container-border-radius) 0;
+    letter-spacing: 0.95px;
+    padding: 3px 8px;
+    font-weight: 700;
 }
+
 .conversation {
-  margin-top: auto;
-  background: #fff;
-  overflow: hidden;
+    margin-top: auto;
+    background: #fff;
+    overflow: hidden;
 }
+
 .conversation-container {
-  display: flex;
-  flex-direction: column;
-  padding: 14px 14px 28px;
-  overflow-y: scroll;
-  width: calc(100% + 18px);
-  scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 14px 28px;
+    overflow-y: scroll;
+    width: calc(100% + 18px);
+    scroll-behavior: smooth;
 }
+
 .message {
-  margin-top: 6px;
-  display: flex;
+    margin-top: 6px;
+    display: flex;
 }
+
 .message span {
-  background: whitesmoke;
-  border-radius: 3px;
-  display: inline-block;
-  padding: 6px 12px;
+    background: whitesmoke;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 6px 12px;
 }
+
 .message.user span {
-  background: #189be6;
-  color: #fff;
-  margin-left: auto;
+    background: #189be6;
+    color: #fff;
+    margin-left: auto;
+    margin-right: 20px;
 }
 
 @media screen and (min-width: 360px) {
-  .chat-app {
-    height: 600px;
-  }
-  .chat-app_content {
-    border: 1px solid green;
-    height: calc(600px - (var(--header-height) + var(--input-height)));
-  }
-  .conversation-container {
-    max-height: calc(600px - (var(--header-height) + var(--input-height)));
-  }
+    .chat-app {
+        height: 600px;
+    }
+    .chat-app_content {
+        border: 1px solid green;
+        height: calc(600px - (var(--header-height) + var(--input-height)));
+    }
+    .conversation-container {
+        max-height: calc(600px - (var(--header-height) + var(--input-height)));
+    }
 }
