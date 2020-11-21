@@ -3,7 +3,16 @@
 // import the needed node_modules.
 const express = require('express');
 const morgan = require('morgan');
-
+const getBotMessage = (text) => {
+  const commonGreetings = ["hi", "hello", "howdy", "hey"];
+  let botMsg = "";
+  if (commonGreetings.find((word) => word === text.toLowerCase().replace(/[^a-zA-Z]/g, ''))) {
+    botMsg = "Hello!";
+  } else {
+    botMsg = `Bzzt ${text}`;
+  }
+  return botMsg;
+};
 express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
@@ -42,7 +51,7 @@ express()
     const message = { author: 'monkey', text: textExample};
     const randomTime = Math.floor(Math.random() * 3000);
     setTimeout(() => {
-      res.status(300).json({ status: 300, message })
+      res.status(200).json({ status:200, message })
     }, randomTime)
   })
 
@@ -52,9 +61,17 @@ express()
     const randomTime = Math.floor(Math.random() * 3000);
     console.log(req.query.text);
     setTimeout(() => {
-      res.status(400).json({ status: 400, message });
+      res.status(200).json({ status: 200, message });
     }, randomTime);
     console.log(req.query);
+  })
+
+  .get('/bot-message', (req, res) => {
+    const botText = getBotMessage(req.query.text);
+    const message = { author: 'bot', text: `${botText}` };
+    setTimeout(() => {
+      res.status(200).json({status: 200, message});
+    })
   })
 
   // add new endpoints here ☝️
