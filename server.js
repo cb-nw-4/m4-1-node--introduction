@@ -55,7 +55,19 @@ express()
     const getBotMessage = (text) => {
       const commonGreetings = ["hi", "hello", "howdy"];
       const commonGoodbyes = ["bye", "goodbye", "chow"]
+      const commonJokes = ["What did the Buddhist ask the hot dog vendor? Make me one with everything." ,
+                          "You know why you never see elephants hiding up in trees? Because they’re really good at it." ,
+                          "What is red and smells like blue paint? Red paint."]
       let botMsg = `Bzzt ${text}`;
+      commonJokes.forEach((element) =>{
+        if (element.includes(text.toLowerCase())) 
+        if (text === "something funny")
+          return "Do you want to hear a joke?"
+      })
+
+
+
+
       commonGreetings.forEach((element) =>{
         if (element.includes(text.toLowerCase())) 
           botMsg = "Bzzt Hello";
