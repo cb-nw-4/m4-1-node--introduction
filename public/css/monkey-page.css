@@ -2,7 +2,7 @@
 @import '_chat-app.css';
 
 body {
-  background: url(/images/monkey_bg.jpg) no-repeat center center;
+  background: url(../images/monkey_bg.jpg) no-repeat center center;
   background-size: cover;
   height: 100vh;
   display: flex;
