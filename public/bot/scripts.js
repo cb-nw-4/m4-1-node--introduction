@@ -20,13 +20,14 @@ const updateConversation = (message) => {
   handleFocus();
 };
 
+
 const sendMessage = (event) => {
   event.preventDefault();
 
   const message = { author: 'user', text: messageInput.value };
   updateConversation(message);
 
-  fetch('/bot-message')
+  fetch(`/bot-message/?text=${message.text}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
