@@ -36,3 +36,5 @@ const sendMessage = (event) => {
 
 // call handleFocus on load
 handleFocus();
+
+// get same error message about JSON as in cat file

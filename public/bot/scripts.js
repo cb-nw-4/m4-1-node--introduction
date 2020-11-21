@@ -26,7 +26,22 @@ const sendMessage = (event) => {
   const message = { author: 'user', text: messageInput.value };
   updateConversation(message);
 
-  fetch('/bot-message')
+  const getBotMessage = () => {
+    const commonGreetings = ["hi", "hello", "howdy", "hi there"];
+    const commonGoodbyes = ["goodbye", "see ya", "ciao", "later"];
+    let botMsg = "";
+    if (commonGreetings.includes(message.text.toLowerCase())) {
+      botMsg = "Bzzt hello!";
+    } else if (commonGoodbyes.includes(message.text.toLowerCase())) {
+      botMsg = "Bzzt goodbye!";
+    } else {
+      botMsg = `Bzzt ${message.text}`;
+    }
+    return botMsg;
+  }
+  getBotMessage();
+
+  fetch(`/bot-message?text=${getBotMessage()}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
