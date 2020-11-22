@@ -3,6 +3,7 @@
 // import the needed node_modules.
 const express = require('express');
 const morgan = require('morgan');
+let tellJoke = false;
 
 express()
   // Below are methods that are included in express(). We chain them for convenience.
@@ -59,10 +60,17 @@ express()
   .get('/bot-message', (req, res) => {
       const text = req.query;
       //console.log(req.query);
+      //let tellJoke = false;
       const getBotMessage = (text) => {
         //console.log(text.text + "test")
         const commonGreetings = ["hi", "hello", "howdy"];
         const commonGoodbyes = ["bye", "goodbye", "ciao"];
+        const jokes = ["How many tickles does it take to make an octopus laugh? Ten tickles.",
+                       "Did you hear about the cheese factory that exploded in France? There was nothing left but de Brie.",
+                       "Why aren't koalas actual bears? They don't meet the koalafications.",
+                       "What do you call it when Batman skips church? Christian Bale.",
+                       "What did the janitor say when he jumped out of the closet? SUPPLIES!",
+                       "I can’t take my dog to the park because the ducks keep trying to bite him. I guess that’s what I get for buying a pure bread dog."];
         let botMsg = "";
         let commonHellos = false;
         let commonFarewells = false;
@@ -77,17 +85,23 @@ express()
               commonFarewells = true;
         });
 
-        if (commonHellos) {
+        if (text.text.toLowerCase() === "something funny") {
+          tellJoke = true;
+          botMsg = "Want to hear a joke? Yes or No";
+        } else if (tellJoke == true && text.text.toLowerCase() === "yes") {
+          botMsg = `${jokes[Math.floor(Math.random() * jokes.length)]}  Another one? Yes or no`;
+        } else if (tellJoke == true && text.text.toLowerCase() === "no") {
+          botMsg = "Goodbye!";
+        } else if (commonHellos) {
           botMsg = "Bzzt Hello";
         } else if (commonFarewells) {
           botMsg = "Bzzt Goodbye";
         } else {
           botMsg = `Bzzt ${req.query.text}`;
         }
-
+        
         return botMsg;
-
-      } 
+      };
 
     const message = { author: 'bot', text: `${getBotMessage(text)}`};
 
@@ -95,7 +109,7 @@ express()
     setTimeout(() => {
       res.status(200).json({status: 200, message});
     }, randomTime);
-    console.log(req.query.text)
+    //console.log(req.query.text)
   })
 
   // add new endpoints here ☝️
