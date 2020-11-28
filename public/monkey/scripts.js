@@ -29,7 +29,6 @@ const sendMessage = (event) => {
   fetch('/monkey-message')
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       updateConversation(data.message);
     });
 };
