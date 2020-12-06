@@ -26,7 +26,7 @@ const sendMessage = (event) => {
   const message = { author: 'user', text: messageInput.value };
   updateConversation(message);
 
-  fetch('/monkey-message')
+  fetch(`/monkey-message`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
